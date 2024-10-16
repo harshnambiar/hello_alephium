@@ -1,0 +1,20 @@
+{
+  "fullNodeVersion": "v3.8.4",
+  "compilerOptionsUsed": {
+    "ignoreUnusedConstantsWarnings": false,
+    "ignoreUnusedVariablesWarnings": false,
+    "ignoreUnusedFieldsWarnings": false,
+    "ignoreUnusedPrivateFunctionsWarnings": false,
+    "ignoreUpdateFieldsCheckWarnings": false,
+    "ignoreCheckExternalCallerWarnings": false,
+    "ignoreUnusedFunctionReturnWarnings": false
+  },
+  "infos": {
+    "CounterRalph": {
+      "sourceFile": "hello.ral",
+      "sourceCodeHash": "5605b6c3958ed332c8b98f8ad154ebdd8e768ba9d8e233b96367ad57a2b26896",
+      "bytecodeDebugPatch": "=8-2+4f=38+1=1-1=10+a0007e021d5468652063757272656e7420636f756e7465722076616c75652069732000=38",
+      "codeHashDebug": "0a39752af45e123825ab1df30e80980c655c167080508150e1bbe12206c5203e"
+    }
+  }
+}
