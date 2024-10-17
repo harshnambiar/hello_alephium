@@ -1,10 +1,7 @@
-// Defines a contract named `TokenFaucet`.
-// A contract is a collection of fields (its state) and functions.
-// Once deployed, a contract resides at a specific address on the Alephium blockchain.
-// Contract fields are permanently stored in contract storage.
-// A contract can issue an initial amount of token at its deployment.
+
 Contract CounterRalph(mut counter: U256) {
 
+    mapping[Address, U256] counter_usages
 
     event Change(by: Address, value: U256)
 
@@ -18,7 +15,7 @@ Contract CounterRalph(mut counter: U256) {
     }
 
     
-    @using(updateFields = true, checkExternalCaller = false)
+    @using(updateFields = true, checkExternalCaller = false, preapprovedAssets = true)
     pub fn incrementCounter() -> () {
         // Debug events can be helpful for error analysis
         emit Debug(`The current counter value is ${counter}`)
@@ -27,6 +24,16 @@ Contract CounterRalph(mut counter: U256) {
         assert!(counter <= 100, ErrorCodes.MaxLimit)
         
         counter = counter + 1
+
+       let add = callerAddress!()
+       if (counter_usages.contains!(add)) {
+       	let count = counter_usages[add]
+	counter_usages[add] = count + 1
+       }
+       else {
+       	counter_usages.insert!(add, add, 1)
+       }
+       
 
         // Emit the event defined earlier.
         emit Change(callerAddress!(), counter)
