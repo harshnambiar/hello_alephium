@@ -4,9 +4,12 @@ Contract CounterRalph(mut counter: U256) {
     mapping[Address, U256] counter_usages
 
     event Change(by: Address, value: U256)
+    event Reset(by: Address)
 
     enum ErrorCodes {
         MaxLimit = 0
+        AlreadyNil = 1
+        LackOfBal = 7
     }
 
     
@@ -28,7 +31,7 @@ Contract CounterRalph(mut counter: U256) {
        let add = callerAddress!()
        if (counter_usages.contains!(add)) {
        	let count = counter_usages[add]
-	counter_usages[add] = count + 1
+        counter_usages[add] = count + 1
        }
        else {
        	counter_usages.insert!(add, add, 1)
@@ -37,5 +40,28 @@ Contract CounterRalph(mut counter: U256) {
 
         // Emit the event defined earlier.
         emit Change(callerAddress!(), counter)
+    }
+
+     @using(updateFields = true, checkExternalCaller = false, preapprovedAssets = true, assetsInContract = true)
+    pub fn resetCounter() -> () {
+        // Debug events can be helpful for error analysis
+        emit Debug(`The current counter value is ${counter}`)
+
+
+        assert!(counter != 0, ErrorCodes.AlreadyNil)
+	
+        // Charge the resetting fee
+        let add = callerAddress!()
+        let b1 = tokenRemaining!(add, ALPH)
+        transferTokenToSelf!(add, ALPH, 1)
+	let b2 = tokenRemaining!(add, ALPH)
+	assert!(b1 == b2 + 1, ErrorCodes.LackOfBal)
+	
+        counter = 0
+
+
+
+        // Emit the event defined earlier.
+        emit Reset(add)
     }
 }
