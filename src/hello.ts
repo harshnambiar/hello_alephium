@@ -24,7 +24,7 @@ async function increment() {
   const deployments = await Deployments.load(configuration, 'testnet')
 	console.log(deployments)
   //Make sure it match your address group
-  const accountGroup = 0
+  const accountGroup = 3
 
   const deployed = deployments.getDeployedContractResult(accountGroup, 'CounterRalph')
 
