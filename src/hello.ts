@@ -22,9 +22,9 @@ async function increment() {
   //.deployments contains the info of our `TokenFaucet` deployement, as we need to now the contractId and address
   //This was auto-generated with the `cli deploy` of our `scripts/0_deploy_faucet.ts`
   const deployments = await Deployments.load(configuration, 'testnet')
-
+	console.log(deployments)
   //Make sure it match your address group
-  const accountGroup = 1
+  const accountGroup = 0
 
   const deployed = deployments.getDeployedContractResult(accountGroup, 'CounterRalph')
 
@@ -51,5 +51,5 @@ async function increment() {
   }
 }
 
-// Let's perform one withdraw
-await increment()
+// Let's perform one increment
+increment()
