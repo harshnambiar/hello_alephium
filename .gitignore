@@ -1,5 +1,3 @@
-artifacts
 node_modules
-deployments
 .env
 dist

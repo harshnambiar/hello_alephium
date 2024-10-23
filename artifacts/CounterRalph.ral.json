@@ -1,0 +1,101 @@
+{
+  "version": "v3.8.4",
+  "name": "CounterRalph",
+  "bytecode": "01030e409140c4010000000103d3c49e0524a0000201030002004038d37d63fb97a000134064320c7ba0000d2aa100b41700140a5f5f6d61705f5f305f5f16004744cbc54c170c0d0d140a5f5f6d61705f5f305f5f16004744cb0101170116010d2a0c0e0c140a5f5f6d61705f5f305f5f16004744cb01024a0a1600d1a2140a5f5f6d61705f5f305f5f16004744b10dd2010105b4a0005f01010003001dd36a088b55a0000c300d7bb417001600a4170116000da91600a41702160116020d2a2f13077b0ca1000616005e",
+  "codeHash": "6910cc288781d9628fdc2e2d9f98ab1c977b0335a71daf35e6f1b4233601f9de",
+  "fieldsSig": {
+    "names": [
+      "counter"
+    ],
+    "types": [
+      "U256"
+    ],
+    "isMutable": [
+      true
+    ]
+  },
+  "eventsSig": [
+    {
+      "name": "Change",
+      "fieldNames": [
+        "by",
+        "value"
+      ],
+      "fieldTypes": [
+        "Address",
+        "U256"
+      ]
+    },
+    {
+      "name": "Reset",
+      "fieldNames": [
+        "by"
+      ],
+      "fieldTypes": [
+        "Address"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "getCounter",
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": [
+        "U256"
+      ]
+    },
+    {
+      "name": "incrementCounter",
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": []
+    },
+    {
+      "name": "resetCounter",
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": []
+    }
+  ],
+  "constants": [],
+  "enums": [
+    {
+      "name": "ErrorCodes",
+      "fields": [
+        {
+          "name": "MaxLimit",
+          "value": {
+            "type": "U256",
+            "value": "0"
+          }
+        },
+        {
+          "name": "AlreadyNil",
+          "value": {
+            "type": "U256",
+            "value": "1"
+          }
+        },
+        {
+          "name": "LackOfBal",
+          "value": {
+            "type": "U256",
+            "value": "7"
+          }
+        }
+      ]
+    }
+  ],
+  "mapsSig": {
+    "names": [
+      "counter_usages"
+    ],
+    "types": [
+      "Map[Address,U256]"
+    ]
+  }
+}
