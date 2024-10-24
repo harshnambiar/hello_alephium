@@ -21,8 +21,14 @@ Your first smart contract in the Ralph language for Alephium
 17. make sure the accounts group id is the same in the previous step as is in the file created in Step 15  
 18. do an npx tsc --build in the root folder  
 19. if everything worked correctly, a dist folder is generated  
-20. do a node dist/src/hello.ts  
+20. do a node dist/src/hello.js  
 21. if it worked, the console should print "au revoir" at the end of the execution flow  
+22. uncomment out the increment_counter() at the end of src/hello.ts and comment out the display_counter()  
+23. do an npx tsc --build again, and then do a node dist/src/hello.js  
+24. if all goes well, the console should print "au revoir 2"  
+25. repeat the exercise by uncommenting out the reset_counter() function and commenting out the display_counter() function  
+26. build again and run node dist/src/hello.js again  
+27. it should print "au revoir 3" in the console if everything worked perfectly  
  
 
  
