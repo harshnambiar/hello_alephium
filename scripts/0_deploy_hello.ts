@@ -12,7 +12,8 @@ const deployCounter: DeployFunction<Settings> = async (
     
     // The initial state of the hello contract
     initialFields: {
-      counter: 0n
+      counter: 0n,
+      count: 0n
     }
   })
   console.log('CounterRalph contract id: ' + result.contractInstance.contractId)

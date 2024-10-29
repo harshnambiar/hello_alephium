@@ -1,0 +1,4 @@
+TxScript ResetCounter(ctr: CounterRalph) {
+    ctr.resetCounter{callerAddress!() -> ALPH: 100000000000000000}()
+}
+

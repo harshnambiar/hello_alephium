@@ -34,14 +34,15 @@ import {
   Narrow,
 } from "@alephium/web3";
 import { default as CounterRalphContractJson } from "../CounterRalph.ral.json";
-import { getContractByCodeHash } from "./contracts";
-
+import { getContractByCodeHash, registerContract } from "./contracts";
+import { Entries, AllStructs } from "./types";
 import { RalphMap } from "@alephium/web3";
 
 // Custom types for the contract
 export namespace CounterRalphTypes {
   export type Fields = {
     counter: bigint;
+    count: bigint;
   };
 
   export type State = ContractState<Fields>;
@@ -53,6 +54,14 @@ export namespace CounterRalphTypes {
     getCounter: {
       params: Omit<CallContractParams<{}>, "args">;
       result: CallContractResult<bigint>;
+    };
+    getLastCaller: {
+      params: Omit<CallContractParams<{}>, "args">;
+      result: CallContractResult<Address>;
+    };
+    getLastFiveChanges: {
+      params: Omit<CallContractParams<{}>, "args">;
+      result: CallContractResult<[bigint, bigint, bigint, bigint, bigint]>;
     };
     incrementCounter: {
       params: Omit<CallContractParams<{}>, "args">;
@@ -84,6 +93,14 @@ export namespace CounterRalphTypes {
       params: Omit<SignExecuteContractMethodParams<{}>, "args">;
       result: SignExecuteScriptTxResult;
     };
+    getLastCaller: {
+      params: Omit<SignExecuteContractMethodParams<{}>, "args">;
+      result: SignExecuteScriptTxResult;
+    };
+    getLastFiveChanges: {
+      params: Omit<SignExecuteContractMethodParams<{}>, "args">;
+      result: SignExecuteScriptTxResult;
+    };
     incrementCounter: {
       params: Omit<SignExecuteContractMethodParams<{}>, "args">;
       result: SignExecuteScriptTxResult;
@@ -98,7 +115,7 @@ export namespace CounterRalphTypes {
   export type SignExecuteMethodResult<T extends keyof SignExecuteMethodTable> =
     SignExecuteMethodTable[T]["result"];
 
-  export type Maps = { counter_usages?: Map<Address, bigint> };
+  export type Maps = { counter_usages?: Map<bigint, Entries> };
 }
 
 class Factory extends ContractFactory<
@@ -109,7 +126,7 @@ class Factory extends ContractFactory<
     return encodeContractFields(
       addStdIdToFields(this.contract, fields),
       this.contract.fieldsSig,
-      []
+      AllStructs
     );
   }
 
@@ -118,6 +135,7 @@ class Factory extends ContractFactory<
     ErrorCodes: {
       MaxLimit: BigInt("0"),
       AlreadyNil: BigInt("1"),
+      DataMalfunction: BigInt("2"),
       LackOfBal: BigInt("7"),
     },
   };
@@ -138,6 +156,40 @@ class Factory extends ContractFactory<
       >
     ): Promise<TestContractResult<bigint, CounterRalphTypes.Maps>> => {
       return testMethod(this, "getCounter", params, getContractByCodeHash);
+    },
+    getLastCaller: async (
+      params: Omit<
+        TestContractParams<
+          CounterRalphTypes.Fields,
+          never,
+          CounterRalphTypes.Maps
+        >,
+        "testArgs"
+      >
+    ): Promise<TestContractResult<Address, CounterRalphTypes.Maps>> => {
+      return testMethod(this, "getLastCaller", params, getContractByCodeHash);
+    },
+    getLastFiveChanges: async (
+      params: Omit<
+        TestContractParams<
+          CounterRalphTypes.Fields,
+          never,
+          CounterRalphTypes.Maps
+        >,
+        "testArgs"
+      >
+    ): Promise<
+      TestContractResult<
+        [bigint, bigint, bigint, bigint, bigint],
+        CounterRalphTypes.Maps
+      >
+    > => {
+      return testMethod(
+        this,
+        "getLastFiveChanges",
+        params,
+        getContractByCodeHash
+      );
     },
     incrementCounter: async (
       params: Omit<
@@ -184,11 +236,12 @@ class Factory extends ContractFactory<
 export const CounterRalph = new Factory(
   Contract.fromJson(
     CounterRalphContractJson,
-    "=8-4=1+d=1+123=41-1+c=14+7e021d5468652063757272656e7420636f756e7465722076616c75652069732000a000=173-1+c=40+7a7e0214696e73657274206174206d617020706174683a2000=31-1+f=10+a0007e021d5468652063757272656e7420636f756e7465722076616c75652069732000=80",
-    "6a76c755294a0f1c6efa10a81fd79498e48c575f79226c1780260ae9df5fbd73",
-    []
+    "=16-2+82=2-2+ea=445-1+9=10+a0007e021d5468652063757272656e7420636f756e7465722076616c75652069732000=154+7a7e0214696e73657274206174206d617020706174683a2000=53-1+f=10+a0007e021d5468652063757272656e7420636f756e7465722076616c75652069732000=116",
+    "2e40852d9b7d9ebd0c35117f81afcd695e07206c9fe72936c95d817030cbca1b",
+    AllStructs
   )
 );
+registerContract(CounterRalph);
 
 // Use this class to interact with the blockchain
 export class CounterRalphInstance extends ContractInstance {
@@ -197,7 +250,7 @@ export class CounterRalphInstance extends ContractInstance {
   }
 
   maps = {
-    counter_usages: new RalphMap<Address, bigint>(
+    counter_usages: new RalphMap<bigint, Entries>(
       CounterRalph.contract,
       this.contractId,
       "counter_usages"
@@ -264,6 +317,28 @@ export class CounterRalphInstance extends ContractInstance {
         getContractByCodeHash
       );
     },
+    getLastCaller: async (
+      params?: CounterRalphTypes.CallMethodParams<"getLastCaller">
+    ): Promise<CounterRalphTypes.CallMethodResult<"getLastCaller">> => {
+      return callMethod(
+        CounterRalph,
+        this,
+        "getLastCaller",
+        params === undefined ? {} : params,
+        getContractByCodeHash
+      );
+    },
+    getLastFiveChanges: async (
+      params?: CounterRalphTypes.CallMethodParams<"getLastFiveChanges">
+    ): Promise<CounterRalphTypes.CallMethodResult<"getLastFiveChanges">> => {
+      return callMethod(
+        CounterRalph,
+        this,
+        "getLastFiveChanges",
+        params === undefined ? {} : params,
+        getContractByCodeHash
+      );
+    },
     incrementCounter: async (
       params?: CounterRalphTypes.CallMethodParams<"incrementCounter">
     ): Promise<CounterRalphTypes.CallMethodResult<"incrementCounter">> => {
@@ -293,6 +368,23 @@ export class CounterRalphInstance extends ContractInstance {
       params: CounterRalphTypes.SignExecuteMethodParams<"getCounter">
     ): Promise<CounterRalphTypes.SignExecuteMethodResult<"getCounter">> => {
       return signExecuteMethod(CounterRalph, this, "getCounter", params);
+    },
+    getLastCaller: async (
+      params: CounterRalphTypes.SignExecuteMethodParams<"getLastCaller">
+    ): Promise<CounterRalphTypes.SignExecuteMethodResult<"getLastCaller">> => {
+      return signExecuteMethod(CounterRalph, this, "getLastCaller", params);
+    },
+    getLastFiveChanges: async (
+      params: CounterRalphTypes.SignExecuteMethodParams<"getLastFiveChanges">
+    ): Promise<
+      CounterRalphTypes.SignExecuteMethodResult<"getLastFiveChanges">
+    > => {
+      return signExecuteMethod(
+        CounterRalph,
+        this,
+        "getLastFiveChanges",
+        params
+      );
     },
     incrementCounter: async (
       params: CounterRalphTypes.SignExecuteMethodParams<"incrementCounter">

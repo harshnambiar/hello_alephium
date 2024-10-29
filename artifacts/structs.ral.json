@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Entries",
+    "fieldNames": [
+      "val",
+      "ts",
+      "caller"
+    ],
+    "fieldTypes": [
+      "U256",
+      "U256",
+      "Address"
+    ],
+    "isMutable": [
+      true,
+      true,
+      true
+    ]
+  }
+]

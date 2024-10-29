@@ -1,16 +1,19 @@
 {
-  "version": "v3.8.4",
+  "version": "v3.8.0",
   "name": "CounterRalph",
-  "bytecode": "01030e409140c4010000000103d3c49e0524a0000201030002004038d37d63fb97a000134064320c7ba0000d2aa100b41700140a5f5f6d61705f5f305f5f16004744cbc54c170c0d0d140a5f5f6d61705f5f305f5f16004744cb0101170116010d2a0c0e0c140a5f5f6d61705f5f305f5f16004744cb01024a0a1600d1a2140a5f5f6d61705f5f305f5f16004744b10dd2010105b4a0005f01010003001dd36a088b55a0000c300d7bb417001600a4170116000da91600a41702160116020d2a2f13077b0ca1000616005e",
-  "codeHash": "6910cc288781d9628fdc2e2d9f98ab1c977b0335a71daf35e6f1b4233601f9de",
+  "bytecode": "02050e405940d84146418b010000000103d3c49e0524a0000201000005014024d301356f5fa0010c2f4c05ca17001600024a1a0c0d0d140a5f5f6d61705f5f305f5fa0014044cb1704160401010d0d0d160401010e0d0d160401011703170217011603020100000b054045d36dafdbd30c0c0c0c0c17041703170217011700a001170510170616050c3316060c341a4c40280c0d0d140a5f5f6d61705f5f305f5f16054044cb170a160a01010d0d0d160a01010e0d0d160a0101170917081707160816067a11314d7916050d2b170516060d2b17064a7fd0160016011602160316040201030005004035d37d63fb97a000134064320c7ba0000d2aa100140a5f5f6d61705f5f305f5fa0010d2a4044cbc5190e7bb41700561701a000160116001704170317021600d1a2140a5f5f6d61705f5f305f5fa0010d2a4044b1160216031604d20103a0010d2aa10105b4a0005f01010003001dd36a088b55a0000c300d7bb417001600a41701160013c4016345785d8a0000a91600a417021601160213c4016345785d8a00002a2f13077b0ca1000616005e",
+  "codeHash": "c1b0ed805f46172198afa77d83f178036ad02ba0bb27df14aea8f17e5da0687f",
   "fieldsSig": {
     "names": [
-      "counter"
+      "counter",
+      "count"
     ],
     "types": [
+      "U256",
       "U256"
     ],
     "isMutable": [
+      true,
       true
     ]
   },
@@ -44,6 +47,24 @@
       "paramIsMutable": [],
       "returnTypes": [
         "U256"
+      ]
+    },
+    {
+      "name": "getLastCaller",
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": [
+        "Address"
+      ]
+    },
+    {
+      "name": "getLastFiveChanges",
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": [
+        "[U256;5]"
       ]
     },
     {
@@ -81,6 +102,13 @@
           }
         },
         {
+          "name": "DataMalfunction",
+          "value": {
+            "type": "U256",
+            "value": "2"
+          }
+        },
+        {
           "name": "LackOfBal",
           "value": {
             "type": "U256",
@@ -95,7 +123,7 @@
       "counter_usages"
     ],
     "types": [
-      "Map[Address,U256]"
+      "Map[U256,Entries]"
     ]
   }
 }

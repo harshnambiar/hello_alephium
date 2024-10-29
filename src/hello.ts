@@ -5,7 +5,7 @@ import configuration from '../alephium.config'
 import { CounterRalph } from '../artifacts/ts'
 
 async function display_counter() {
-	console.log('init display')
+  console.log('init display')
   //Select our network defined in alephium.config.ts
   const network = configuration.networks.testnet
 
@@ -81,7 +81,7 @@ async function increment_counter() {
     await counter.transact.incrementCounter({
     	signer: wallet,
    	//args: { },
-   	attoAlphAmount: ONE_ALPH / 10n + DUST_AMOUNT
+   	attoAlphAmount: ONE_ALPH + DUST_AMOUNT
    })
 	
    
@@ -124,7 +124,7 @@ async function reset_counter() {
     await counter.transact.resetCounter({
     	signer: wallet,
    	//args: { },
-   	attoAlphAmount: ONE_ALPH / 10n + DUST_AMOUNT
+   	attoAlphAmount: ONE_ALPH + DUST_AMOUNT
    })
 	
    

@@ -1,7 +1,10 @@
+struct Entries { mut val: U256, mut ts: U256, mut caller: Address }
 
-Contract CounterRalph(mut counter: U256) {
+Contract CounterRalph(mut counter: U256, mut count: U256) {
 
-    mapping[Address, U256] counter_usages
+
+    mapping[U256, Entries] counter_usages
+
 
     event Change(by: Address, value: U256)
     event Reset(by: Address)
@@ -9,12 +12,37 @@ Contract CounterRalph(mut counter: U256) {
     enum ErrorCodes {
         MaxLimit = 0
         AlreadyNil = 1
+        DataMalfunction = 2
         LackOfBal = 7
     }
 
     
     pub fn getCounter() -> U256 {
         return counter
+    }
+
+    pub fn getLastCaller() -> Address {
+        if (count == 0){
+            let null_add = nullContractAddress!()
+            return null_add
+        }
+        else {
+            let et = counter_usages[count]
+            return et.caller
+        }
+    }
+
+    pub fn getLastFiveChanges() -> [U256; 5]{
+        let mut arr = [0, 0, 0, 0, 0]
+        let mut i = count
+        let mut j = 4
+        while (i > 0 && j >= 0){
+            let et = counter_usages[i]
+            arr[j] = et.ts
+            i = i - 1
+            j = j - 1
+        }
+        return arr
     }
 
     
@@ -28,16 +56,13 @@ Contract CounterRalph(mut counter: U256) {
         
         counter = counter + 1
 
+        assert!(!counter_usages.contains!(count + 1), ErrorCodes.DataMalfunction)
        let add = callerAddress!()
-       if (counter_usages.contains!(add)) {
-       	let count = counter_usages[add]
-        counter_usages[add] = count + 1
-       }
-       else {
-       	counter_usages.insert!(add, add, 1)
-       }
-       
+       let timestamp = blockTimeStamp!()
+       let et = Entries { val : counter, ts: timestamp, caller: add }
+       counter_usages.insert!(add, count + 1, et)
 
+        count = count + 1
         // Emit the event defined earlier.
         emit Change(callerAddress!(), counter)
     }
@@ -53,9 +78,9 @@ Contract CounterRalph(mut counter: U256) {
         // Charge the resetting fee
         let add = callerAddress!()
         let b1 = tokenRemaining!(add, ALPH)
-        transferTokenToSelf!(add, ALPH, 1)
+        transferTokenToSelf!(add, ALPH, 100000000000000000)
 	let b2 = tokenRemaining!(add, ALPH)
-	assert!(b1 == b2 + 1, ErrorCodes.LackOfBal)
+	assert!(b1 == b2 + 100000000000000000, ErrorCodes.LackOfBal)
 	
         counter = 0
 

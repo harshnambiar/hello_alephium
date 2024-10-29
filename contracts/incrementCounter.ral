@@ -1,0 +1,3 @@
+TxScript IncrementCounter(ctr: CounterRalph) {
+    ctr.incrementCounter{callerAddress!() -> ALPH: 1}()
+}

@@ -11,21 +11,18 @@ import { default as devnetDeployments } from "../../deployments/.deployments.dev
 export type Deployments = {
   deployerAddress: string;
   contracts: {
-    CounterRalph?: DeployContractExecutionResult<CounterRalphInstance>;
+    CounterRalph: DeployContractExecutionResult<CounterRalphInstance>;
   };
 };
 
 function toDeployments(json: any): Deployments {
   const contracts = {
-    CounterRalph:
-      json.contracts["CounterRalph"] === undefined
-        ? undefined
-        : {
-            ...json.contracts["CounterRalph"],
-            contractInstance: CounterRalph.at(
-              json.contracts["CounterRalph"].contractInstance.address
-            ),
-          },
+    CounterRalph: {
+      ...json.contracts["CounterRalph"],
+      contractInstance: CounterRalph.at(
+        json.contracts["CounterRalph"].contractInstance.address
+      ),
+    },
   };
   return {
     ...json,

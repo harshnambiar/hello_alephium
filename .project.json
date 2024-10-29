@@ -1,5 +1,5 @@
 {
-  "fullNodeVersion": "v3.8.0",
+  "fullNodeVersion": "v3.8.4",
   "compilerOptionsUsed": {
     "ignoreUnusedConstantsWarnings": false,
     "ignoreUnusedVariablesWarnings": false,
@@ -7,14 +7,33 @@
     "ignoreUnusedPrivateFunctionsWarnings": false,
     "ignoreUpdateFieldsCheckWarnings": false,
     "ignoreCheckExternalCallerWarnings": false,
-    "ignoreUnusedFunctionReturnWarnings": false
+    "ignoreUnusedFunctionReturnWarnings": false,
+    "skipAbstractContractCheck": false
   },
   "infos": {
     "CounterRalph": {
       "sourceFile": "hello.ral",
-      "sourceCodeHash": "b5a1d2099c6cb8009a23f26b298d7be6da9112c4b8f0b79a678833127c7b4d62",
-      "bytecodeDebugPatch": "=8-4=1+d=1+123=41-1+c=14+7e021d5468652063757272656e7420636f756e7465722076616c75652069732000a000=173-1+c=40+7a7e0214696e73657274206174206d617020706174683a2000=31-1+f=10+a0007e021d5468652063757272656e7420636f756e7465722076616c75652069732000=80",
-      "codeHashDebug": "6a76c755294a0f1c6efa10a81fd79498e48c575f79226c1780260ae9df5fbd73"
+      "sourceCodeHash": "80da9214cec906ea027288343c18f595c42fe92fb072a292ca345ddace617ae3",
+      "bytecodeDebugPatch": "=16-2+82=2-2+ea=445-1+9=10+a0007e021d5468652063757272656e7420636f756e7465722076616c75652069732000=154+7a7e0214696e73657274206174206d617020706174683a2000=53-1+f=10+a0007e021d5468652063757272656e7420636f756e7465722076616c75652069732000=116",
+      "codeHashDebug": "2e40852d9b7d9ebd0c35117f81afcd695e07206c9fe72936c95d817030cbca1b"
+    },
+    "Entries": {
+      "sourceFile": "hello.ral",
+      "sourceCodeHash": "80da9214cec906ea027288343c18f595c42fe92fb072a292ca345ddace617ae3",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": ""
+    },
+    "IncrementCounter": {
+      "sourceFile": "incrementCounter.ral",
+      "sourceCodeHash": "e989324d602ae52f977c086ffcbfbe2d24b5ac684bbef878159c34255e20b0ea",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": ""
+    },
+    "ResetCounter": {
+      "sourceFile": "resetCounter.ral",
+      "sourceCodeHash": "f33b47967295c7a564c2c98b95c039ee7b54cd660f363b42b2d16cb2bde256c5",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": ""
     }
   }
 }
