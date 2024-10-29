@@ -28,7 +28,14 @@ Your first smart contract in the Ralph language for Alephium
 24. if all goes well, the console should print "au revoir 2"  
 25. repeat the exercise by uncommenting out the reset_counter() function and commenting out the display_counter() function  
 26. build again and run node dist/src/hello.js again  
-27. it should print "au revoir 3" in the console if everything worked perfectly  
+27. it should print "au revoir 3" in the console if everything worked perfectly
+28. in the contracts folder, create the files for incrementCounter and resetCounter and copy the contents as shown
+29. run the compile command again
+30. run the npx tsc --build command again
+31. if all goes well, in the dist folder, there should be an artifacts folder
+32. create the [hello_alephium_frontend](https://github.com/harshnambiar/hello_alephium_frontend) repository separately as shown
+33. in its src folder, copy paste the artifacts folder that was obtained in step 31
+34. the next steps are in the hello_alephium_frontend repository to help you connect your alephium code to the frontend
  
 
  
